@@ -83,8 +83,8 @@ function Card({
             className="bg-white rounded-full shadow-sm"
           >
             <svg
-              fill="#a8a8a8"
-              className="w-5 h-5 hover:fill-primary"
+              fill="#F4C41E"
+              className="w-5 h-5 hover:fill-yellow-600"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 512 512"
             >
@@ -98,8 +98,8 @@ function Card({
             className="bg-white rounded-full shadow-sm"
           >
             <svg
-              fill="#a8a8a8"
-              className="w-5 h-5 hover:fill-red-600"
+              fill="#FF4343"
+              className="w-5 h-5 hover:fill-red-700"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 448 512"
             >

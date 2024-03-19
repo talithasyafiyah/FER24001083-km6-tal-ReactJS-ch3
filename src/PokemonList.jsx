@@ -138,6 +138,12 @@ function PokemonList() {
     setToastMessage("Successfully deleted all Pokémon from collection!");
   };
 
+  const removeAll = () => {
+    setPokemonData([]);
+    setDeleteModalOpen(false);
+    setToastMessage("Successfully deleted all Pokémon!");
+  };
+
   // Untuk menampilkan data pada tab collection
   const filteredCollection = activeTab === "collection" ? collection : [];
 
@@ -433,7 +439,7 @@ function PokemonList() {
               </button>
 
               {isDropdownOpen && (
-                <div className="absolute z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
+                <div className="absolute z-10 bg-white divide-y divide-gray-100 rounded-xl shadow w-full">
                   <ul
                     className="py-2 text-sm text-gray-700"
                     aria-labelledby="dropdownDefaultButton"
@@ -505,71 +511,144 @@ function PokemonList() {
         </div>
 
         {/* Delete Button in Collection */}
-        <div className="flex justify-end mb-4">
-          {activeTab === "collection" && filteredCollection.length > 0 && (
+        {activeTab === "collection" && filteredCollection.length > 0 && (
+          <div className="flex justify-end mb-4">
             <button
               onClick={handleDeleteModalToggle}
               className="py-2 px-4 text-base font-medium bg-secondary text-white rounded-full items-center hover:bg-red-800"
             >
               Delete all Pokémon
             </button>
-          )}
 
-          <div
-            id="delete-modal"
-            className={`${
-              deleteModalOpen ? "" : "hidden"
-            } fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 z-50`}
-          >
-            <div className="relative p-4 w-full max-w-md max-h-full">
-              <div className="relative bg-white rounded-lg shadow">
-                <div className="flex flex-col">
-                  <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t">
-                    <h3 className="text-xl font-semibold text-textcolor">
-                      Delete all Pokémon from collection
-                    </h3>
-                    <button
-                      type="button"
-                      onClick={handleDeleteModalToggle}
-                      className="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-textcolor rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
-                    >
-                      <svg
-                        className="w-3 h-3"
-                        aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 14 14"
+            <div
+              id="delete-modal"
+              className={`${
+                deleteModalOpen ? "" : "hidden"
+              } fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 z-50`}
+            >
+              <div className="relative p-4 w-full max-w-md max-h-full">
+                <div className="relative bg-white rounded-lg shadow">
+                  <div className="flex flex-col">
+                    <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t">
+                      <h3 className="text-xl font-semibold text-textcolor">
+                        Delete all Pokémon from collection
+                      </h3>
+                      <button
+                        type="button"
+                        onClick={handleDeleteModalToggle}
+                        className="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-textcolor rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
                       >
-                        <path
-                          stroke="currentColor"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
-                        />
-                      </svg>
-                      <span className="sr-only">Close modal</span>
+                        <svg
+                          className="w-3 h-3"
+                          aria-hidden="true"
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 14 14"
+                        >
+                          <path
+                            stroke="currentColor"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+                          />
+                        </svg>
+                        <span className="sr-only">Close modal</span>
+                      </button>
+                    </div>
+                  </div>
+                  <div className="px-4 md:px-5 pb-4 md:pb-6 pt-2 md:pt-3">
+                    <p className="mb-4 text-base text-text4">
+                      Are you sure want to{" "}
+                      <span className="text-secondary font-semibold">
+                        delete
+                      </span>{" "}
+                      all of Pokémon from your collection?
+                    </p>
+                    <button
+                      onClick={removeAllFromCollection}
+                      type="submit"
+                      className="w-full text-white bg-secondary hover:bg-red-800 font-medium rounded-full text-sm px-5 py-2.5 text-center"
+                    >
+                      Delete Pokémon
                     </button>
                   </div>
-                </div>
-                <div className="px-4 md:px-5 pb-4 md:pb-6 pt-2 md:pt-3">
-                  <p className="mb-4 text-base text-text4">
-                    Are you sure want to{" "}
-                    <span className="text-secondary font-semibold">delete</span>{" "}
-                    all of Pokémon from your collection?
-                  </p>
-                  <button
-                    onClick={removeAllFromCollection}
-                    type="submit"
-                    className="w-full text-white bg-secondary hover:bg-red-800 font-medium rounded-full text-sm px-5 py-2.5 text-center"
-                  >
-                    Delete Pokémon
-                  </button>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        )}
+
+        {/* Delete Button All */}
+        {activeTab === "all" &&
+          filteredData &&
+          visibleCards < filteredData.length > 0 && (
+            <div className="flex justify-end mb-4">
+              <button
+                onClick={handleDeleteModalToggle}
+                className="py-2 px-4 text-base font-medium bg-secondary text-white rounded-full items-center hover:bg-red-800"
+              >
+                Delete all Pokémon
+              </button>
+
+              <div
+                id="delete-modal"
+                className={`${
+                  deleteModalOpen ? "" : "hidden"
+                } fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 z-50`}
+              >
+                <div className="relative p-4 w-full max-w-md max-h-full">
+                  <div className="relative bg-white rounded-lg shadow">
+                    <div className="flex flex-col">
+                      <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t">
+                        <h3 className="text-xl font-semibold text-textcolor">
+                          Delete all Pokémon from collection
+                        </h3>
+                        <button
+                          type="button"
+                          onClick={handleDeleteModalToggle}
+                          className="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-textcolor rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
+                        >
+                          <svg
+                            className="w-3 h-3"
+                            aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 14 14"
+                          >
+                            <path
+                              stroke="currentColor"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="2"
+                              d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+                            />
+                          </svg>
+                          <span className="sr-only">Close modal</span>
+                        </button>
+                      </div>
+                    </div>
+                    <div className="px-4 md:px-5 pb-4 md:pb-6 pt-2 md:pt-3">
+                      <p className="mb-4 text-base text-text4">
+                        Are you sure want to{" "}
+                        <span className="text-secondary font-semibold">
+                          delete
+                        </span>{" "}
+                        all of Pokémon from your collection?
+                      </p>
+                      <button
+                        onClick={removeAll}
+                        type="submit"
+                        className="w-full text-white bg-secondary hover:bg-red-800 font-medium rounded-full text-sm px-5 py-2.5 text-center"
+                      >
+                        Delete Pokémon
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
 
         {/* Card */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
