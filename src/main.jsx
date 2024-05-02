@@ -5,11 +5,13 @@ import PokemonList from "./PokemonList.jsx";
 import Temporary from "./Temporary.jsx";
 import Navbar from "./components/Navbar.jsx";
 import HeroSection from "./components/HeroSection.jsx";
+import Footer from "./components/Footer.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <div>
     <Navbar />
     <HeroSection />
     <PokemonList />
+    <Footer />
   </div>
 );
