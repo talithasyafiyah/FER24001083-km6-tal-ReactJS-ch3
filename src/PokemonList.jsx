@@ -78,7 +78,6 @@ function PokemonList() {
     setModalOpen(false);
     handleToastMessage("Pokémon added successfully!");
     handleSortOption("Highest");
-    console.log(sortOption);
   };
 
   // Fungsi untuk edit pokemon
